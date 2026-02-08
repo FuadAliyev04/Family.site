@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<title>Ailəm ❤️</title>
+<meta name="description" content="Ailəmə həsr olunmuş xüsusi və sevgi dolu səhifə">
+<meta name="author" content="Fuad">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f6d365, #fda085);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* START BUTTON */
+    .start {
+        animation: fadeIn 1s ease;
+    }
+
+    .start button {
+        padding: 18px 45px;
+        font-size: 20px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        background: #ff6f61;
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        transition: 0.3s;
+    }
+
+    .start button:hover {
+        transform: scale(1.05);
+    }
+
+    /* MAIN CARD */
+    .container {
+        display: none;
+        background: #fff;
+        width: 90%;
+        max-width: 700px;
+        border-radius: 25px;
+        padding: 35px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        text-align: center;
+        animation: scaleIn 0.8s ease forwards;
+    }
+
+    h1 {
+        color: #ff6f61;
+        margin-bottom: 10px;
+    }
+
+    .members {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+    }
+
+    .member {
+        background: #fff3e0;
+        border-radius: 18px;
+        padding: 25px 15px;
+        cursor: pointer;
+        transition: 0.3s;
+        opacity: 0;
+        animation: fadeUp 0.8s ease forwards;
+    }
+
+    .member:nth-child(1){ animation-delay: 0.3s;}
+    .member:nth-child(2){ animation-delay: 0.6s;}
+    .member:nth-child(3){ animation-delay: 0.9s;}
+
+    .member:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .member h3 {
+        color: #ff7043;
+        margin: 0;
+    }
+
+    /* MODAL */
+    .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .modal-content {
+        background: #fff;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 20px;
+        padding: 30px;
+        animation: scaleIn 0.4s ease;
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+        from {opacity:0}
+        to {opacity:1}
+    }
+
+    @keyframes scaleIn {
+        from {opacity:0; transform: scale(0.85)}
+        to {opacity:1; transform: scale(1)}
+    }
+
+    @keyframes fadeUp {
+        from {opacity:0; transform: translateY(25px)}
+        to {opacity:1; transform: translateY(0)}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="start" id="start">
+    <button onclick="openMain()">Ailəm üçün ❤️</button>
+</div>
+
+<div class="container" id="main">
+    <h1>Ailəm</h1>
+    <p>Bu səhifə həyatımın ən dəyərli insanlarına həsr olunub.</p>
+
+    <div class="members">
+        <div class="member" onclick="openModal('ata')">
+            <h3>Ata</h3>
+            <p>Güc və yol göstərən</p>
+        </div>
+        <div class="member" onclick="openModal('ana')">
+            <h3>Ana</h3>
+            <p>Sevginin özü</p>
+        </div>
+        <div class="member" onclick="openModal('baci')">
+            <h3>Bacı</h3>
+            <p>Dost və sirdaş</p>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">✖</span>
+        <div id="modalText"></div>
+    </div>
+</div>
+
+<script>
+function openMain() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("main").style.display = "block";
+}
+
+function openModal(type) {
+    const text = {
+        ata: `<h2>Ata</h2>
+        <p>🤍Atam mənim üçün sadəcə valideyn deyil, həyat məktəbidir. 
+        Gücü, səbrli yanaşması və verdiyi dəyərlər mənim xarakterimin əsasını təşkil edir.
+        Hər çətin anda dayaq olub, heç vaxt tək buraxmayıb.🤍</p>`,
+
+        ana: `<h2>Ana</h2>
+        <p>🌹Anam saf sevginin, mərhəmətin və fədakarlığın canlı nümunəsidir.
+        Hər zaman anlayışı və duaları ilə yanımdadır.
+        Onun varlığı mənim üçün ən böyük güvəndir.🤍</p>`,
+
+        baci: `<h2>Bacı</h2>
+        <p>🌹Bacım mənim üçün həm ailə, həm də ən yaxın dostdur.
+        Sevinclərimi və çətinliklərimi paylaşdığım,
+        hər zaman səmimi və dəstək olan bir insandır.🤍</p>`
+    };
+
+    document.getElementById("modalText").innerHTML = text[type];
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
